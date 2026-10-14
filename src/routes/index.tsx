@@ -29,7 +29,7 @@ const slides = [
 function Home() {
   const [i, setI] = useState(0);
   useEffect(() => { const t = setInterval(() => setI((v) => (v + 1) % slides.length), 6000); return () => clearInterval(t); }, []);
-  const s = slides[i];
+  const s = slides[i]!;
   const newest = products.filter((p) => p.isNew).concat(products.filter((p) => !p.isNew)).slice(0, 8);
 
   return (

@@ -15,7 +15,7 @@ export function SiteFooter() {
         </div>
         <form className="flex" onSubmit={(e) => {
           e.preventDefault();
-          if (!/^\S+@\S+\.\S+$/.test(email)) return toast.error("Masukkan alamat email yang valid.");
+          if (!/^\S+@\S+\.\S+$/.test(email)) { toast.error("Masukkan alamat email yang valid."); return; }
           toast.success("Terima kasih! Anda telah berlangganan."); setEmail("");
         }}>
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Masukkan email Anda" aria-label="Email"

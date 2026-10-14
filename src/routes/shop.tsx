@@ -5,13 +5,13 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { categories, formatIDR, products, type Category } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-type Search = { q?: string; category?: Category; sale?: boolean };
+type Search = { q?: string | undefined; category?: Category | undefined; sale?: boolean | undefined };
 
 export const Route = createFileRoute("/shop")({
-  validateSearch: (s: Record<string, unknown>): Search => ({
-    q: typeof s.q === "string" && s.q ? s.q : undefined,
-    category: typeof s.category === "string" ? (s.category as Category) : undefined,
-    sale: s.sale === true || s.sale === "true" ? true : undefined,
+  validateSearch: (s: Record<string, any>): Search => ({
+    q: typeof s["q"] === "string" && s["q"] ? s["q"] : undefined,
+    category: typeof s["category"] === "string" ? (s["category"] as Category) : undefined,
+    sale: s["sale"] === true || s["sale"] === "true" ? true : undefined,
   }),
   head: () => ({
     meta: [
