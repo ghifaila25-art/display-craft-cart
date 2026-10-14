@@ -27,15 +27,15 @@ const slots: { key: Slot; label: string }[] = [
 
 function Studio() {
   const [active, setActive] = useState<Slot>("outerwear");
-  const [pick, setPick] = useState<Partial<Record<Slot, Product>>>({ outerwear: products[0], atasan: products[1] });
+  const [pick, setPick] = useState<Partial<Record<Slot, Product | undefined>>>({ outerwear: products[0]!, atasan: products[1]! });
   const chosen = slots.map((s) => pick[s.key]).filter(Boolean) as Product[];
   const total = chosen.reduce((s, p) => s + p.price, 0);
   const preview = pick.outerwear ?? pick.atasan ?? pick.bawahan ?? pick.aksesoris;
 
-  const addAll = () => {
+  const addAll = (): void => {
     const available = chosen.filter((p) => p.stock > 0);
-    if (available.length === 0) return toast.error("Pilih minimal satu item yang tersedia.");
-    available.forEach((p) => actions.addToCart({ productId: p.id, size: p.sizes[Math.min(1, p.sizes.length - 1)], color: p.colors[0].name, qty: 1 }));
+    if (available.length === 0) { toast.error("Pilih minimal satu item yang tersedia."); return; }
+    available.forEach((p) => actions.addToCart({ productId: p.id, size: p.sizes[Math.min(1, p.sizes.length - 1)]!, color: p.colors[0]!.name, qty: 1 }));
     toast.success(`${available.length} item outfit ditambahkan ke keranjang.`);
   };
 

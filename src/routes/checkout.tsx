@@ -38,7 +38,7 @@ function Checkout() {
   const [f, setF] = useState({ name: "", email: "", phone: "", address: "", city: "", postal: "" });
   const [ship, setShip] = useState("reguler");
   const [pay, setPay] = useState("GoPay");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof typeof f, string>>>({});
   const shipFee = t.subtotal >= FREE_SHIPPING_MIN && ship === "reguler" ? 0 : shipMethods.find((s) => s.id === ship)!.fee;
 
   if (cart.length === 0) return (
@@ -50,7 +50,7 @@ function Checkout() {
   );
 
   const validate = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<keyof typeof f, string>> = {};
     if (f.name.trim().length < 3) e.name = "Nama minimal 3 karakter";
     if (!/^\S+@\S+\.\S+$/.test(f.email)) e.email = "Email tidak valid";
     if (!/^(\+62|0)8\d{7,11}$/.test(f.phone.replace(/[\s-]/g, ""))) e.phone = "Nomor HP tidak valid (contoh: 08123456789)";

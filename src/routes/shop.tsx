@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { categories, formatIDR, products, type Category } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-type Search = { q?: string; category?: Category; sale?: boolean };
+type Search = { q?: string | undefined; category?: Category | undefined; sale?: boolean | undefined };
 
 export const Route = createFileRoute("/shop")({
   validateSearch: (s: Record<string, unknown>): Search => ({

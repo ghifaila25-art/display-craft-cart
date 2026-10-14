@@ -44,12 +44,12 @@ export const actions = {
   addToCart(item: CartItem) {
     const cart = [...state.cart];
     const i = cart.findIndex((c) => c.productId === item.productId && c.size === item.size && c.color === item.color);
-    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + item.qty }; else cart.push(item);
+    if (i >= 0) cart[i] = { ...cart[i]!, qty: cart[i]!.qty + item.qty }; else cart.push(item);
     set({ cart });
   },
   setQty(index: number, qty: number) {
     const cart = [...state.cart];
-    if (qty <= 0) cart.splice(index, 1); else cart[index] = { ...cart[index], qty };
+    if (qty <= 0) cart.splice(index, 1); else cart[index] = { ...cart[index]!, qty };
     set({ cart });
   },
   remove(index: number) { const cart = [...state.cart]; cart.splice(index, 1); set({ cart }); },
