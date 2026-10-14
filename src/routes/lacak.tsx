@@ -6,7 +6,7 @@ import { DELIVERY_MS, STAGES, useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/lacak")({
-  validateSearch: (s: Record<string, unknown>): { id?: string | undefined } => ({ id: typeof s.id === "string" ? s.id : undefined }),
+  validateSearch: (s: Record<string, any>): { id?: string | undefined } => ({ id: typeof s["id"] === "string" ? s["id"] : undefined }),
   head: () => ({
     meta: [
       { title: "Lacak Pesanan | YSP" },
@@ -21,12 +21,12 @@ export const Route = createFileRoute("/lacak")({
 });
 
 // route polyline across a stylized map (viewBox 0 0 600 360)
-const PATH = [[70, 290], [170, 290], [170, 190], [330, 190], [330, 110], [520, 110]] as const;
-function pointAt(t: number) {
-  const segs = PATH.slice(1).map((p, i) => ({ a: PATH[i], b: p, len: Math.hypot(p[0] - PATH[i][0], p[1] - PATH[i][1]) }));
+const PATH: [number, number][] = [[70, 290], [170, 290], [170, 190], [330, 190], [330, 110], [520, 110]];
+function pointAt(t: number): [number, number] {
+  const segs = PATH.slice(1).map((p, i) => { const a = PATH[i]!; return { a, b: p, len: Math.hypot(p[0] - a[0], p[1] - a[1]) }; });
   let d = segs.reduce((s, x) => s + x.len, 0) * t;
   for (const s of segs) { if (d <= s.len) { const r = d / s.len; return [s.a[0] + (s.b[0] - s.a[0]) * r, s.a[1] + (s.b[1] - s.a[1]) * r]; } d -= s.len; }
-  return PATH[PATH.length - 1];
+  return PATH[PATH.length - 1]!;
 }
 
 function Track() {
@@ -83,9 +83,8 @@ function Track() {
                 {[60, 140, 220, 300].map((y) => <rect key={y} x="0" y={y} width="600" height="10" className="fill-map-road" />)}
                 {[100, 250, 400, 520].map((x) => <rect key={x} x={x} y="0" width="10" height="360" className="fill-map-road" />)}
                 <polyline points={PATH.map((p) => p.join(",")).join(" ")} fill="none" className="stroke-route" strokeWidth="5" strokeDasharray="10 8" strokeLinecap="round" />
-                <polyline points={[...PATH.filter((_, i) => i === 0), [cx, cy]].join(" ")} fill="none" />
-                <circle cx={PATH[0][0]} cy={PATH[0][1]} r="16" className="fill-success" />
-                <circle cx={PATH[5][0]} cy={PATH[5][1]} r="16" className="fill-primary" />
+                <circle cx={PATH[0]![0]} cy={PATH[0]![1]} r="16" className="fill-success" />
+                <circle cx={PATH[5]![0]} cy={PATH[5]![1]} r="16" className="fill-primary" />
                 <g style={{ transition: "transform 1s linear" }} transform={`translate(${cx - 16},${cy - 16})`}>
                   <circle cx="16" cy="16" r="18" className="fill-card stroke-primary" strokeWidth="2" />
                 </g>

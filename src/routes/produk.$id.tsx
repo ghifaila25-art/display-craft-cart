@@ -27,16 +27,16 @@ function ProductPage() {
   const p = getProduct(id)!;
   const { wishlist } = useStore();
   const navigate = useNavigate();
-  const [color, setColor] = useState(p.colors[0].name);
-  const [size, setSize] = useState<string | null>(p.sizes.length === 1 ? p.sizes[0] : null);
+  const [color, setColor] = useState(p.colors[0]!.name);
+  const [size, setSize] = useState<string | null>(p.sizes.length === 1 ? p.sizes[0]! : null);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"desk" | "spek" | "kirim" | "ulasan">("desk");
   const soldOut = p.stock === 0;
   const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
   const related = products.filter((x) => x.id !== p.id && x.categories.some((c) => p.categories.includes(c))).slice(0, 4);
 
-  const add = (buyNow = false) => {
-    if (!size) return toast.error("Silakan pilih ukuran terlebih dahulu.");
+  const add = (buyNow = false): void => {
+    if (!size) { toast.error("Silakan pilih ukuran terlebih dahulu."); return; }
     actions.addToCart({ productId: p.id, size, color, qty });
     if (buyNow) navigate({ to: "/checkout" }); else toast.success(`${p.name} ditambahkan ke keranjang.`);
   };
