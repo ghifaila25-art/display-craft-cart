@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as LacakRouteImport } from './routes/lacak'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as StyleStudioRouteImport } from './routes/style-studio'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as ProdukIdRouteImport } from './routes/produk.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +22,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LacakRoute = LacakRouteImport.update({
+  id: '/lacak',
+  path: '/lacak',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StyleStudioRoute = StyleStudioRouteImport.update({
+  id: '/style-studio',
+  path: '/style-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProdukIdRoute = ProdukIdRouteImport.update({
@@ -31,31 +55,69 @@ const ProdukIdRoute = ProdukIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/lacak': typeof LacakRoute
   '/shop': typeof ShopRoute
+  '/style-studio': typeof StyleStudioRoute
+  '/wishlist': typeof WishlistRoute
   '/produk/$id': typeof ProdukIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/lacak': typeof LacakRoute
   '/shop': typeof ShopRoute
+  '/style-studio': typeof StyleStudioRoute
+  '/wishlist': typeof WishlistRoute
   '/produk/$id': typeof ProdukIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/lacak': typeof LacakRoute
   '/shop': typeof ShopRoute
+  '/style-studio': typeof StyleStudioRoute
+  '/wishlist': typeof WishlistRoute
   '/produk/$id': typeof ProdukIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shop' | '/produk/$id'
+  fullPaths:
+    | '/'
+    | '/checkout'
+    | '/lacak'
+    | '/shop'
+    | '/style-studio'
+    | '/wishlist'
+    | '/produk/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop' | '/produk/$id'
-  id: '__root__' | '/' | '/shop' | '/produk/$id'
+  to:
+    | '/'
+    | '/checkout'
+    | '/lacak'
+    | '/shop'
+    | '/style-studio'
+    | '/wishlist'
+    | '/produk/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/checkout'
+    | '/lacak'
+    | '/shop'
+    | '/style-studio'
+    | '/wishlist'
+    | '/produk/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
+  LacakRoute: typeof LacakRoute
   ShopRoute: typeof ShopRoute
+  StyleStudioRoute: typeof StyleStudioRoute
+  WishlistRoute: typeof WishlistRoute
   ProdukIdRoute: typeof ProdukIdRoute
 }
 
@@ -68,11 +130,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lacak': {
+      id: '/lacak'
+      path: '/lacak'
+      fullPath: '/lacak'
+      preLoaderRoute: typeof LacakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/style-studio': {
+      id: '/style-studio'
+      path: '/style-studio'
+      fullPath: '/style-studio'
+      preLoaderRoute: typeof StyleStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/produk/$id': {
@@ -87,7 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
+  LacakRoute: LacakRoute,
   ShopRoute: ShopRoute,
+  StyleStudioRoute: StyleStudioRoute,
+  WishlistRoute: WishlistRoute,
   ProdukIdRoute: ProdukIdRoute,
 }
 export const routeTree = rootRouteImport
