@@ -1,0 +1,3 @@
+- [x] Replace the shared store logo with the uploaded artwork and matching favicon.
+- [x] Keep desktop product filters anchored to the viewport with independent scrolling; preserve the fixed mobile filter panel.
+- [ ] Verify logo rendering and filter behavior at desktop and narrow widths.

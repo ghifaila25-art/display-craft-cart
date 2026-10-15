@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { BRAND, FREE_SHIPPING_MIN, formatIDR, getProduct } from "@/lib/products";
 import { actions, cartTotals, useStore } from "@/lib/store";
+import logoAsset from "@/assets/ysp-logo.jpg.asset.json";
 
 const nav = [
   { to: "/", label: "Beranda" },
@@ -14,9 +15,8 @@ const nav = [
 
 export function Logo() {
   return (
-    <Link to="/" className="flex items-end gap-2">
-      <span className="font-serif text-2xl font-semibold leading-none tracking-tight">{BRAND.name}</span>
-      <span className="hidden text-[8px] uppercase leading-tight tracking-[0.2em] sm:block">{BRAND.tagline.split(" ").slice(0, 2).join(" ")}<br />{BRAND.tagline.split(" ").slice(2).join(" ")}</span>
+    <Link to="/" aria-label={`${BRAND.name} — Beranda`} className="block shrink-0">
+      <img src={logoAsset.url} alt={`${BRAND.name} — Your Shopping Place`} width={1445} height={206} className="h-auto w-40 object-contain mix-blend-multiply sm:w-56" />
     </Link>
   );
 }
@@ -33,8 +33,8 @@ export function SiteHeader() {
       <div className="bg-primary py-2 text-center text-[11px] tracking-wide text-primary-foreground">
         Gratis ongkir untuk pembelian di atas {formatIDR(FREE_SHIPPING_MIN)} · Diskon 10% untuk member baru
       </div>
-      <div className="container-ysp grid h-16 grid-cols-[auto_1fr_auto] items-center gap-4">
-        <div className="flex items-center gap-3">
+      <div className="container-ysp grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <div className="flex min-w-0 items-center gap-3">
           <Sheet>
             <SheetTrigger aria-label="Menu" className="lg:hidden"><Menu className="h-5 w-5" /></SheetTrigger>
             <SheetContent side="left" className="bg-background">
