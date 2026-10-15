@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Store state (cart, wishlist, orders) lives in src/lib/store.ts persisted to localStorage; no backend yet, so keep it as the single source.
+- Product catalog and brand name live in src/lib/products.ts so branding and items are edited in one place.
