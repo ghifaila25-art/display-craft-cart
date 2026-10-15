@@ -11,3 +11,4 @@
 
 - Store state (cart, wishlist, orders) lives in src/lib/store.ts persisted to localStorage; no backend yet, so keep it as the single source.
 - Product catalog and brand name live in src/lib/products.ts so branding and items are edited in one place.
+- Tracking uses a lazy client-only Leaflet component and a bundled road-snapped demo route; this prevents SSR DOM errors and keeps the simulated route available without a live routing service.

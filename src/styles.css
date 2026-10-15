@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -102,3 +103,15 @@
 @utility animate-rise { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 @utility animate-slowzoom { animation: slowzoom 6s ease-out both; }
+
+.delivery-map { height: 440px; min-width: 0; }
+.delivery-map .leaflet-container { background: var(--map); font-family: var(--font-sans); }
+.delivery-map .leaflet-control-attribution { background: var(--card); color: var(--muted-foreground); }
+.delivery-map .leaflet-control-attribution a { color: var(--foreground); }
+.delivery-marker { display: grid; place-items: center; border-radius: 50%; border: 2px solid var(--card); background: var(--primary); color: var(--primary-foreground); box-shadow: 0 2px 8px var(--border); }
+.delivery-marker-store { background: var(--success); }
+.delivery-marker-courier { background: var(--card); color: var(--foreground); border-color: var(--route); }
+.delivery-map .leaflet-marker-pane .delivery-marker-courier { transition: transform 1s linear; }
+.delivery-map .leaflet-tooltip { border-color: var(--border); background: var(--card); color: var(--foreground); box-shadow: none; }
+@media (max-width: 640px) { .delivery-map { height: 360px; } }
+@media (prefers-reduced-motion: reduce) { .delivery-map .leaflet-marker-pane .delivery-marker-courier { transition: none; } }
