@@ -93,8 +93,8 @@ function Shop() {
       <h1 className="mt-3 text-4xl md:text-5xl">{search.category ?? (search.sale ? "Promo" : "Semua Produk")}</h1>
       {search.q && <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">Hasil pencarian “{search.q}” <button aria-label="Hapus pencarian" onClick={() => navigate({ search: (p) => ({ ...p, q: undefined }) })}><X className="h-3 w-3" /></button></p>}
       <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
-        <aside className="hidden lg:block">{Filters}</aside>
-        <div>
+        <aside aria-label="Filter produk" className="sticky top-28 hidden max-h-[calc(100dvh-8rem)] self-start overflow-y-auto pr-2 pb-2 lg:block">{Filters}</aside>
+        <div className="min-w-0">
           <div className="mb-6 flex items-center justify-between gap-4 border-b pb-4">
             <button onClick={() => setFiltersOpen(true)} className="flex items-center gap-2 text-sm lg:hidden"><SlidersHorizontal className="h-4 w-4" /> Filter</button>
             <span className="hidden text-sm text-muted-foreground lg:block">{list.length} produk</span>
